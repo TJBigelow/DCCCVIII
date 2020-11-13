@@ -9,20 +9,21 @@ class SongsController < ApplicationController
          render json: song
      end
 
-     def create        
+     def create     
         song = Song.new(song_params)   
         return render json: {errors: song.errors.full_messages}, status: 500 unless song.save
 
+        track_volumes = track_volumes(params)
         tracks = split_params(params)
-        
+    
         tracks.each do |track, sounds|
-            track = Track.create(song: song, track_num: track.to_i)
+            track = Track.create(song: song, track_num: track.to_i, volume: track_volumes[track])
             sounds.each_with_index do |sound, i|
                 if sound != "0"
                     TrackSound.create(track: track, sound_id: sound, position: i)
                 end
             end
-        end        
+        end      
         render json: song
      end
 
@@ -57,16 +58,37 @@ class SongsController < ApplicationController
         params.permit("title","creator","bpm")
     end
 
+    def track_volumes(params)
+        track_volumes = {}
+        track_volumes["1"] = params["1"][16]
+        track_volumes["2"] = params["2"][16]
+        track_volumes["3"] = params["3"][16]
+        track_volumes["4"] = params["4"][16]
+        track_volumes["5"] = params["5"][16]
+        track_volumes["6"] = params["6"][16]
+
+        track_volumes
+    end
+
     def split_params(params)
         tracks = {}
+        params["1"].pop 
         tracks["1"] = params["1"]
+        params["2"].pop
         tracks["2"] = params["2"]
+        params["3"].pop
         tracks["3"] = params["3"]
+        params["4"].pop
         tracks["4"] = params["4"]
-        tracks["5"] = params["5"]
-        tracks["6"] = params["6"]
-        tracks["7"] = params["7"]
-        tracks["8"] = params["8"]
+        params["5"].pop 
+        tracks["5"] = params["5"] 
+        params["6"].pop 
+        tracks["6"] = params["6"] 
+
+        # tracks["5"] = params["5"]
+        # tracks["6"] = params["6"]
+        # tracks["7"] = params["7"]
+        # tracks["8"] = params["8"]
         tracks
     end
 
