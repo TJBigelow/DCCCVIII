@@ -19,6 +19,7 @@ function loadTrack(track, index){
     const trackNodes = Array.from(document.querySelectorAll('.track')[index].children)
     track.track_sounds.forEach(ts => {
         const position = trackNodes.find(pos => pos.dataset.position == ts.position)
+        debugger
         let audio = document.createElement('audio')
         position.dataset.soundId = ts.sound.sound_id
         position.dataset.soundInfo = ts.sound.sound_location
