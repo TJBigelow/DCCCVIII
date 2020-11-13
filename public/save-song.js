@@ -2,17 +2,25 @@ let songForm = document.querySelector('.song-form')
 
 songForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    let seqInputs = document.querySelectorAll('.sequence-input')
+    let allTracks = document.querySelectorAll('.track')
     let tracks= {}    
     tracks["title"] = e.target.songName.value
     tracks["creator"] = e.target.producer.value
     tracks["bpm"] = parseInt(bpm.value)
-    seqInputs.forEach(input => {
+    allTracks.forEach(track => {
+      track.childNodes.forEach(input =>{
         let soundId = input.dataset.soundId
         let trackId = input.parentNode.dataset.trackId
+        if(input.outerHTML.includes("div")){
         tracks[trackId] ? tracks[trackId] = [...tracks[trackId], soundId]:
-        tracks[trackId] = [ soundId ]  
-    })    
+        tracks[trackId] = [ soundId ]
+        }
+        if(input.className === "slider"){
+          // THIS IS WHERE VOLUME IS BEING INPUT INTO PARAMS
+          tracks[trackId]["volume"] = input.value
+        }
+    }) 
+  })  
     saveSong(e,tracks)
 })
 

@@ -9,19 +9,26 @@ class SongsController < ApplicationController
          render json: song
      end
 
-     def create        
+     def create 
+        byebug    
+        # VOLUME IS NOT BEING INPUT INTO PARAMS   
         song = Song.new(song_params)   
         return render json: {errors: song.errors.full_messages}, status: 500 unless song.save
 
         tracks = split_params(params)
+        track_volumes = track_volumes(params)
         
         tracks.each do |track, sounds|
-            track = Track.create(song: song, track_num: track.to_i)
+            track = Track.create(song: song, track_num: track.to_i, volume: 1)
             sounds.each_with_index do |sound, i|
                 if sound != "0"
                     TrackSound.create(track: track, sound_id: sound, position: i)
                 end
             end
+        end
+        
+        track_volumes.each do |track|
+            byebug
         end        
         render json: song
      end
@@ -59,15 +66,26 @@ class SongsController < ApplicationController
 
     def split_params(params)
         tracks = {}
-        tracks["1"] = params["1"]
+        tracks["1"] = params["1"]        
         tracks["2"] = params["2"]
         tracks["3"] = params["3"]
         tracks["4"] = params["4"]
-        tracks["5"] = params["5"]
-        tracks["6"] = params["6"]
-        tracks["7"] = params["7"]
-        tracks["8"] = params["8"]
+
+        # tracks["5"] = params["5"]
+        # tracks["6"] = params["6"]
+        # tracks["7"] = params["7"]
+        # tracks["8"] = params["8"]
         tracks
+    end
+
+    def track_volumes(params)
+        track_volumes = {}
+        byebug
+        track_volumes["1"] = params["1"]["volume"]
+        track_volumes["2"] = params["2"]["volume"]
+        track_volumes["3"] = params["3"]["volume"]
+        track_volumes["4"] = params["4"]["volume"]
+        track_volumes
     end
 
 end
