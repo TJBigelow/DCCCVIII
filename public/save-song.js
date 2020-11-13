@@ -26,7 +26,6 @@ songForm.addEventListener('submit', (e) => {
 })
 
 function saveSong(e,tracks){
-
     const reqObj = {
         method: 'POST',
         headers: {
@@ -46,10 +45,10 @@ function saveSong(e,tracks){
               errorNode.innerText = ""
               errorNode.setAttribute('class', 'hidden')
             }, 3500)
-            } else {              
+            } else {        
               let newOp = document.createElement("OPTION")              
               newOp.setAttribute('data-id', `${savedSong.id}`)
-              newOp.append(`${savedSong.title}`)              
+              newOp.append(`${savedSong.title} - ${savedSong.creator}`)              
               songSelect.append(newOp)                      
               songSelect.value = newOp.value
               } 

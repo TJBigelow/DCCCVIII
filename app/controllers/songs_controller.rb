@@ -80,6 +80,7 @@ class SongsController < ApplicationController
         tracks["3"] = params["3"]
         params["4"].pop
         tracks["4"] = params["4"]
+<<<<<<< HEAD
         params["5"].pop 
         tracks["5"] = params["5"] 
         params["6"].pop 
@@ -89,6 +90,10 @@ class SongsController < ApplicationController
         # tracks["6"] = params["6"]
         # tracks["7"] = params["7"]
         # tracks["8"] = params["8"]
+=======
+        tracks["5"] = params["5"]
+        tracks["6"] = params["6"]
+>>>>>>> master
         tracks
     end
 
