@@ -50,6 +50,7 @@ function fetchSongs(){
 }
 
 function songSelector(songs){
+    songs.sort((a,b) => a.id - b.id)
     const select = document.getElementById('load-song')
     songs.forEach(song => {
         const option = document.createElement('option')
