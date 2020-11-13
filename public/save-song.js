@@ -9,18 +9,19 @@ songForm.addEventListener('submit', (e) => {
     tracks["bpm"] = parseInt(bpm.value)
     allTracks.forEach(track => {
       track.childNodes.forEach(input =>{
-        let soundId = input.dataset.soundId
-        let trackId = input.parentNode.dataset.trackId
+        let trackId
         if(input.outerHTML.includes("div")){
+        let soundId = input.dataset.soundId
+        trackId = input.parentNode.dataset.trackId
         tracks[trackId] ? tracks[trackId] = [...tracks[trackId], soundId]:
         tracks[trackId] = [ soundId ]
         }
         if(input.className === "slider"){
-          // THIS IS WHERE VOLUME IS BEING INPUT INTO PARAMS
-          tracks[trackId]["volume"] = input.value
+          trackId = input.parentNode.dataset.trackId          
+          tracks[trackId] = [...tracks[trackId], input.value]
         }
     }) 
-  })  
+  })
     saveSong(e,tracks)
 })
 
