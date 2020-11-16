@@ -80,7 +80,6 @@ function setUpSequencer(){
                     audio.volume = volume/100
                     e.target.dataset.soundId = sampleArray[currentSoundId].id
                     let status = e.target.getAttribute("class").split(" ")
-
                     e.target.setAttribute("class",`${status[0]} ${status[1]} clicked`)
                     e.target.append(audio)
                 } else {
