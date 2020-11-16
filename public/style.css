@@ -87,10 +87,15 @@ h1{
     border-radius: 20px;
     background-color: grey;
     display: grid;
-    grid-template-columns: repeat(4,25%);
+    grid-template-columns: repeat(3,33%);
     color: white;
     padding: 30px;
     margin: 10px;
+    text-shadow: 2px 2px black;
+    background-image: url(/assets/images/rome.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
     /* box-shadow: 1vw 2vh black; */
 }
 
@@ -186,9 +191,9 @@ button{
 
 .errors {
     background: #c51244 !important;
+    border-radius: 5px;
+    text-align: center;
     padding: 5px;
-    position: relative; 
-    display: inline-block !important;
 }
 
 .hidden {
